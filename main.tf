@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     jenkins = {
-      source  = "ovh/jenkins"
+      source  = "terraform-provider-jenkins/jenkins"
       version = "~> 2.0.0"
     }
   }
