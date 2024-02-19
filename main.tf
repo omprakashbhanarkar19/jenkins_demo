@@ -1,11 +1,3 @@
-terraform {
-  required_providers {
-    jenkins = {
-      source  = "terraform-provider-jenkins/jenkins"
-      version = "~> 2.0.0"
-    }
-  }
-}
 
 # Define provider
 provider "jenkins" {
