@@ -4,6 +4,7 @@ import jenkins
 JENKINS_URL = 'http://54.87.147.137:8080/'
 USERNAME = 'admin'
 PASSWORD = '11390f232fcee633ff7fc863ec99e41da1'
+JOB_NAME = 
 
 # Job definition XML
 JOB_CONFIG = """
@@ -41,12 +42,31 @@ JOB_CONFIG = """
 # Function to create Jenkins pipeline job
 def create_pipeline_job():
     server = jenkins.Jenkins(JENKINS_URL, username=USERNAME, password=PASSWORD)
-    server.create_job('SamplePipelineJob', JOB_CONFIG)
+    server.create_job(JOB_NAME, JOB_CONFIG)
 
-def enable_build_triggers():
 
-    # Enable build triggers
-    job_info['properties'][2]['hudson.triggers.SCMTrigger']['spec'] = 'GitHub hook trigger for GITScm polling'  # Example polling schedule (every minute)
+# Function to enable the "GitHub hook trigger for GITScm polling"
+def enable_github_webhook_trigger():
+    server = jenkins.Jenkins(JENKINS_URL, username=USERNAME, password=PASSWORD)
+    job_config_xml = server.get_job_config(JOB_NAME)
+
+    # Parse job configuration XML
+    root = ET.fromstring(job_config_xml)
+
+    # Find and enable the GitHub webhook trigger
+    properties = root.find('.//properties')
+    github_trigger = ET.SubElement(properties, 'jenkins.triggers.SCMTriggerJobProperty')
+    spec = ET.SubElement(github_trigger, 'spec')
+    spec.text = '* * * * *'  # Example polling schedule (every minute)
+
+    # Update the job with modified configuration
+    updated_config_xml = ET.tostring(root, encoding='unicode')
+    server.reconfig_job(JOB_NAME, updated_config_xml)
+
+# Main function
+def main():
+    enable_github_webhook_trigger()
+
 
 # Main function
 def main():
