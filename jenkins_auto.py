@@ -12,7 +12,22 @@ JOB_CONFIG = """
   <actions/>
   <description>Sample Pipeline Job</description>
   <keepDependencies>false</keepDependencies>
-  <properties/>
+  <properties>
+    <pipelineTriggers>
+      <triggers class="vector">
+        <jenkins.triggers.SCMTrigger>
+          <spec></spec>
+          <ignorePostCommitHooks>True</ignorePostCommitHooks>
+        </jenkins.triggers.SCMTrigger>
+        <org.jenkinsci.plugins.gitea.GiteaPushTrigger plugin="gitea@1.2.0">
+          <spec></spec>
+          <triggerOnEvents>
+            <org.jenkinsci.plugins.gitea.push.PushEvent/>
+          </triggerOnEvents>
+        </org.jenkinsci.plugins.gitea.GiteaPushTrigger>
+      </triggers>
+    </pipelineTriggers>
+  </properties>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@2.85">
     <scm class="hudson.plugins.git.GitSCM" plugin="git@4.0.0">
       <configVersion>2</configVersion>
@@ -43,29 +58,6 @@ JOB_CONFIG = """
 def create_pipeline_job():
     server = jenkins.Jenkins(JENKINS_URL, username=USERNAME, password=PASSWORD)
     server.create_job(JOB_NAME, JOB_CONFIG)
-
-
-# Function to enable the "GitHub hook trigger for GITScm polling"
-def enable_github_webhook_trigger():
-    server = jenkins.Jenkins(JENKINS_URL, username=USERNAME, password=PASSWORD)
-    job_config_xml = server.get_job_config(JOB_NAME)
-
-    # Parse job configuration XML
-    root = ET.fromstring(job_config_xml)
-
-    # Find and enable the GitHub webhook trigger
-    properties = root.find('.//properties')
-    github_trigger = ET.SubElement(properties, 'jenkins.triggers.SCMTriggerJobProperty')
-    spec = ET.SubElement(github_trigger, 'spec')
-    spec.text = '* * * * *'  # Example polling schedule (every minute)
-
-    # Update the job with modified configuration
-    updated_config_xml = ET.tostring(root, encoding='unicode')
-    server.reconfig_job(JOB_NAME, updated_config_xml)
-
-# Main function
-def main():
-    enable_github_webhook_trigger()
 
 
 # Main function
