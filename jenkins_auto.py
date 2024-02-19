@@ -15,10 +15,10 @@ JOB_CONFIG = """
   <properties>
     <pipelineTriggers>
       <triggers class="vector">
-        <jenkins.triggers.SCMTrigger>
+        <jenkins.triggers.SCMTriggerJobProperty>
           <spec></spec>
-          <ignorePostCommitHooks>True</ignorePostCommitHooks>
-        </jenkins.triggers.SCMTrigger>
+          <ignorePostCommitHooks>false</ignorePostCommitHooks>
+        </jenkins.triggers.SCMTriggerJobProperty>
         <org.jenkinsci.plugins.gitea.GiteaPushTrigger plugin="gitea@1.2.0">
           <spec></spec>
           <triggerOnEvents>
