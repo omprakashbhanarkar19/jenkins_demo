@@ -13,20 +13,12 @@ JOB_CONFIG = """
   <description>Sample Pipeline Job</description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <pipelineTriggers>
-      <triggers class="vector">
-        <jenkins.triggers.SCMTriggerJobProperty>
-          <spec></spec>
-          <ignorePostCommitHooks>false</ignorePostCommitHooks>
-        </jenkins.triggers.SCMTriggerJobProperty>
-        <org.jenkinsci.plugins.gitea.GiteaPushTrigger plugin="gitea@1.2.0">
-          <spec></spec>
-          <triggerOnEvents>
-            <org.jenkinsci.plugins.gitea.push.PushEvent/>
-          </triggerOnEvents>
-        </org.jenkinsci.plugins.gitea.GiteaPushTrigger>
-      </triggers>
-    </pipelineTriggers>
+    <jenkins.triggers.SCMTriggerJobProperty>
+      <spec>H/5 * * * *</spec> <!-- Example polling schedule (every 5 minutes) -->
+    </jenkins.triggers.SCMTriggerJobProperty>
+    <com.cloudbees.jenkins.GitHubTriggerProperty plugin="github@1.29.5">
+      <spec></spec> <!-- Leave empty to use default trigger -->
+    </com.cloudbees.jenkins.GitHubTriggerProperty>
   </properties>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@2.85">
     <scm class="hudson.plugins.git.GitSCM" plugin="git@4.0.0">
