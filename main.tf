@@ -1,6 +1,13 @@
+terraform {
+  required_providers {
+    jenkins = {
+      source  = "ovh/jenkins"
+      version = ">= 2.0.0"
+    }
+  }
+
 # Define provider
 provider "jenkins" {
-  version = ">= 2.0.0"
   url     = "http://54.87.147.137:8080/"
   username = "admin"
   password = "11390f232fcee633ff7fc863ec99e41da1"
