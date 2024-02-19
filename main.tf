@@ -1,3 +1,21 @@
+terraform {
+  required_providers {
+    jenkins = {
+      source  = "hashicorp/jenkins"
+      version = "~> 2.0.0"
+    }
+  }
+
+  backend "remote" {
+    organization = "xyz"
+
+    workspaces {
+      name = "jenkins-pipeline"
+    }
+  }
+}
+
+
 
 # Define provider
 provider "jenkins" {
