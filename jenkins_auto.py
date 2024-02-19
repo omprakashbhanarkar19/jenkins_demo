@@ -21,8 +21,6 @@ JOB_CONFIG = """
           <credentialsId>your-credentials-id</credentialsId>
         </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
-      job_info['properties'][2]['hudson.triggers.SCMTrigger']['spec'] = 'GitHub hook trigger for GITScm polling
-'  # Example polling schedule (every minute)
       <branches>
         <hudson.plugins.git.BranchSpec>
           <name>*/main</name>
@@ -44,6 +42,13 @@ JOB_CONFIG = """
 def create_pipeline_job():
     server = jenkins.Jenkins(JENKINS_URL, username=USERNAME, password=PASSWORD)
     server.create_job('SamplePipelineJob', JOB_CONFIG)
+
+def enable_build_triggers():
+    server = jenkins.Jenkins(JENKINS_URL, username=USERNAME, password=PASSWORD)
+    job_info = server.get_job_info(JOB_NAME)
+
+    # Enable build triggers
+    job_info['properties'][0]['hudson.triggers.SCMTrigger']['spec'] = '* * * * *'  # Example polling schedule (every minute)
 
 # Main function
 def main():
