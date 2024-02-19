@@ -21,6 +21,8 @@ JOB_CONFIG = """
           <credentialsId>your-credentials-id</credentialsId>
         </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
+      job_info['properties'][2]['hudson.triggers.SCMTrigger']['spec'] = 'GitHub hook trigger for GITScm polling
+'  # Example polling schedule (every minute)
       <branches>
         <hudson.plugins.git.BranchSpec>
           <name>*/main</name>
