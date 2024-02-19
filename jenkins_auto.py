@@ -13,12 +13,12 @@ JOB_CONFIG = """
   <description>Sample Pipeline Job</description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <jenkins.triggers.SCMTriggerJobProperty>
-      <spec>H/5 * * * *</spec> <!-- Example polling schedule (every 5 minutes) -->
-    </jenkins.triggers.SCMTriggerJobProperty>
-    <com.cloudbees.jenkins.GitHubTriggerProperty plugin="github@1.29.5">
-      <spec></spec> <!-- Leave empty to use default trigger -->
-    </com.cloudbees.jenkins.GitHubTriggerProperty>
+    <hudson.triggers.SCMTriggerJobProperty>
+      <spec></spec> 
+    </hudson.triggers.SCMTriggerJobProperty>
+    <com.cloudbees.hudson.GitHubTriggerProperty plugin="github@1.29.5">
+      <spec></spec>
+    </com.cloudbees.hudson.GitHubTriggerProperty>
   </properties>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@2.85">
     <scm class="hudson.plugins.git.GitSCM" plugin="git@4.0.0">
