@@ -14,10 +14,10 @@ JOB_CONFIG = """
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.triggers.SCMTriggerJobProperty>
-      <spec></spec> 
+      <spec>GitHub hook trigger for GITScm polling</spec> 
     </hudson.triggers.SCMTriggerJobProperty>
     <com.cloudbees.hudson.GitHubTriggerProperty plugin="github@1.29.5">
-      <spec></spec>
+      <spec>GitHub hook trigger for GITScm polling</spec>
     </com.cloudbees.hudson.GitHubTriggerProperty>
   </properties>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@2.85">
