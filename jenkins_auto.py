@@ -14,10 +14,10 @@ JOB_CONFIG = """
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.triggers.SCMTriggerJobProperty>
-      <spec>GitHub hook trigger for GITScm polling</spec> 
+      <spec></spec> 
     </hudson.triggers.SCMTriggerJobProperty>
     <com.cloudbees.hudson.GitHubTriggerProperty plugin="github@1.29.5">
-      <spec>GitHub hook trigger for GITScm polling</spec>
+      <spec></spec>
     </com.cloudbees.hudson.GitHubTriggerProperty>
   </properties>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@2.85">
@@ -55,6 +55,19 @@ def create_pipeline_job():
 # Main function
 def main():
     create_pipeline_job()
+
+# Function to enable the "GitHub hook trigger for GITScm polling"
+
+def enable_github_webhook_trigger():
+    server = jenkins.Jenkins(JENKINS_URL, username=USERNAME, password=PASSWORD)
+    JOB_CONFIG = server.get_job_config(JOB_NAME)
+
+
+def main():
+    enable_github_webhook_trigger()
+
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main()
