@@ -2,7 +2,7 @@ terraform {
   required_providers {
     jenkins = {
       source  = "ovh/jenkins"
-      version = ">= 2.0.0"
+      version = "~> 2.0.0"
     }
   }
 }
