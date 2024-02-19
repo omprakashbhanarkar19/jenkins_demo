@@ -60,7 +60,7 @@ def main():
 
 def enable_github_webhook_trigger():
     server = jenkins.Jenkins(JENKINS_URL, username=USERNAME, password=PASSWORD)
-    JOB_CONFIG = server.get_job_config(JOB_NAME)
+    
 
 
 def main():
