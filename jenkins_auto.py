@@ -4,7 +4,7 @@ import jenkins
 JENKINS_URL = 'http://54.87.147.137:8080/'
 USERNAME = 'admin'
 PASSWORD = '11390f232fcee633ff7fc863ec99e41da1'
-JOB_NAME = 
+JOB_NAME = 'sample_job'
 
 # Job definition XML
 JOB_CONFIG = """
