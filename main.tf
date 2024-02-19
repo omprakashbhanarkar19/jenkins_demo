@@ -5,6 +5,7 @@ terraform {
       version = ">= 2.0.0"
     }
   }
+}
 
 # Define provider
 provider "jenkins" {
